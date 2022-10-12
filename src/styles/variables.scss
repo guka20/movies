@@ -1,0 +1,11 @@
+$bg-color: white;
+$primary-color: black;
+$secondary-color: #9ca3af;
+$general-color: #be123c;
+$width: 100%;
+$max-width: 1200px;
+@mixin fit-background {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
