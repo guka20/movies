@@ -1,8 +1,4 @@
-import {
-  useEffect,
-  useState,
-  useContext,
-} from "react";
+import { useEffect, useState, useContext } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { LoadingContext } from "../Context/Loading";
 import {
@@ -17,7 +13,7 @@ import { MdKeyboardArrowRight } from "react-icons/md";
 import { SwiperExcVid, SwiperTemp } from "../modules/Swiper";
 import { MovieItem } from "../modules/MovieItem";
 import { SwiperSlide } from "swiper/react";
-import { fetch } from "../api/Fetch";
+import { fetchData } from "../api/Fetch";
 import { SearchResultModal } from "../modules/SearchResultModal";
 
 type MoviesDataTypes = [
@@ -55,13 +51,13 @@ export const Home = () => {
     setIsLoading(true);
     let isCancelled = false;
     if (!isCancelled) {
-      fetch("Top250Movies/k_p8ciwzz7").then((res) => {
+      fetchData("Top250Movies").then((res) => {
         setMovieData(res.items.slice(0, 20));
       });
-      fetch("Top250TVs/k_p8ciwzz7").then((res) => {
+      fetchData("Top250TVs").then((res) => {
         setTvsData(res.items.slice(0, 20));
       });
-      fetch("InTheaters/k_p8ciwzz7").then((res) => {
+      fetchData("InTheaters").then((res) => {
         setInTheaters(res.items.slice(0, 20));
       });
     }

@@ -1,12 +1,12 @@
 import axios from "./api";
 
-export const fetch = async (id: string) => {
-  try {
-    const response = await axios.get(id);
-    console.log(response);
-    const data = response.data;
-    return data;
-  } catch (error: any) {
-    console.log(error);
-  }
+export const fetchData = async (id: string) => {
+  return axios
+    .get(id + "/k_p8ciwzz7")
+    .then((res) => {
+      return res.data;
+    })
+    .catch((err) => {
+      console.log(err.status);
+    });
 };
