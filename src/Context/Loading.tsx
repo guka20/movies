@@ -21,7 +21,7 @@ export const LoadingContext = createContext<LoadingContextProps>({
 export const Loading = ({ children }: LoadingProps) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   useEffect(() => {
-    console.log(isLoading);
+    // console.log(isLoading);
   }, [isLoading]);
   return (
     <LoadingContext.Provider value={{ isLoading, setIsLoading }}>

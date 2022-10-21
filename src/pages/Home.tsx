@@ -1,4 +1,8 @@
-import { useEffect, useState, useContext } from "react";
+import {
+  useEffect,
+  useState,
+  useContext,
+} from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { LoadingContext } from "../Context/Loading";
 import {
@@ -11,9 +15,10 @@ import {
 } from "react-icons/ai";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import { SwiperExcVid, SwiperTemp } from "../modules/Swiper";
-import { FeaturedCastItem, MovieItem } from "../modules/MovieItem";
+import { MovieItem } from "../modules/MovieItem";
 import { SwiperSlide } from "swiper/react";
 import { fetch } from "../api/Fetch";
+import { SearchResultModal } from "../modules/SearchResultModal";
 
 type MoviesDataTypes = [
   {
@@ -28,7 +33,6 @@ type MoviesDataTypes = [
     year: string;
   }
 ];
-
 export const Home = () => {
   const { setIsLoading } = useContext(LoadingContext);
   const [movieData, setMovieData] = useState<MoviesDataTypes>([
@@ -40,6 +44,13 @@ export const Home = () => {
   const [inTheaters, setInTheaters] = useState<MoviesDataTypes>([
     {},
   ] as MoviesDataTypes);
+  // const [searchResult, setSearchResult] = useState<MoviesDataTypes>([
+  //   {},
+  // ] as MoviesDataTypes);
+  const [searchInp, setSearchInp] = useState(String);
+  useEffect(() => {
+    console.log(searchInp || 5);
+  }, [searchInp]);
   useEffect(() => {
     setIsLoading(true);
     let isCancelled = false;
@@ -56,11 +67,11 @@ export const Home = () => {
     }
     return () => {
       isCancelled = true;
-      setIsLoading(false);
     };
   }, [setIsLoading]);
   return (
     <>
+      {searchInp && <SearchResultModal searchText={searchInp} />}
       <header className="header">
         <nav className="navbar">
           <div className="icon">
@@ -68,7 +79,12 @@ export const Home = () => {
             <b>Movies</b>
           </div>
           <div className="search">
-            <input type="search" placeholder="What do you want to watch?" />
+            <input
+              type="text"
+              placeholder="What do you want to watch?"
+              value={searchInp}
+              onChange={(e) => setSearchInp(e.target.value)}
+            />
             <AiOutlineSearch />
           </div>
           <div className="hamburger-menu">

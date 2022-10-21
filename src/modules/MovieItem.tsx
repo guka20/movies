@@ -5,10 +5,6 @@ type MovieItemProp = {
   finished: string;
   id: string;
 };
-type FeaturedCastItemProps = {
-  name: string;
-  img: string;
-};
 export const MovieItem = ({
   finished,
   name,
@@ -25,14 +21,6 @@ export const MovieItem = ({
         <img src={require("../assets/imdb-logo.png")} alt="imdb-logo" />{" "}
         <span> {rate} / 10</span>
       </div>
-    </div>
-  );
-};
-export const FeaturedCastItem = ({ name, img }: FeaturedCastItemProps) => {
-  return (
-    <div className="Cast-item">
-      <div className="image" style={{ backgroundImage: `url(${img})` }} />
-      <div className="name">{name}</div>
     </div>
   );
 };
