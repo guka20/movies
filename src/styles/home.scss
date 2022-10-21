@@ -1,102 +1,202 @@
+.header {
+  width: $width;
+  height: 500px;
+  @include fit-background;
+  background-image: url("../assets/movie-banner.png");
+  .navbar {
+    width: 90%;
+    max-width: $max-width;
+    margin: 5px auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .icon {
+      color: white;
+      font-size: 1.3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      img {
+        margin-right: 15px;
+      }
+    }
+    .search {
+      width: 60%;
+      display: flex;
+      align-items: center;
+      position: relative;
+      ::placeholder {
+        color: white;
+        opacity: 1;
+      }
+
+      :-ms-input-placeholder {
+        color: white;
+      }
+
+      ::-ms-input-placeholder {
+        color: white;
+      }
+      input {
+        font-size: 1.1rem;
+        width: 425px;
+        width: 100%;
+        height: 35px;
+        color: white;
+        background-color: transparent;
+        border: 1px solid white;
+      }
+      svg {
+        position: absolute;
+        right: 5px;
+        color: white;
+        font-size: 1.3rem;
+      }
+    }
+    .hamburger-menu {
+      width: 40px;
+      height: 40px;
+      background-color: $general-color;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 1.4rem;
+      cursor: pointer;
+    }
+  }
+}
 .home {
+  margin-top: 30px;
   width: $width;
   max-width: $max-width;
   display: flex;
   flex-direction: column;
   align-items: center;
-  .header {
-    width: $width;
-    height: 500px;
-    @include fit-background;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-      url("https://images.cinemaexpress.com/uploads/user/imagelibrary/2019/5/17/original/john-wick-3-parabellum-movie-review-keanu-reeves.jpg");
-    .navbar {
-      width: 90%;
-      margin: 5px auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      .icon {
-        color: white;
-        font-size: 1.3rem;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        img {
-          margin-right: 15px;
-        }
-      }
-      .search {
-        width: 60%;
-        display: flex;
-        align-items: center;
-        position: relative;
-        ::placeholder {
-          color: white;
-          opacity: 1;
-        }
+  .slide-button-next,
+  .slide-button-prev {
+    width: 60px;
+    color: #6b7280;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 2;
+    font-size: 3rem;
+  }
+  .swiper-pleace {
+    margin-top: 30px;
+    margin-bottom: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: $max-width;
 
-        :-ms-input-placeholder {
-          color: white;
-        }
-
-        ::-ms-input-placeholder {
-          color: white;
-        }
-        input {
-          font-size: 1.1rem;
-          width: 425px;
-          width: 100%;
-          height: 35px;
-          color: white;
-          background-color: transparent;
-          border: 1px solid white;
-        }
-        svg {
-          position: absolute;
-          right: 5px;
-          color: white;
-          font-size: 1.3rem;
-        }
-      }
-      .hamburger-menu {
-        width: 40px;
-        height: 40px;
-        background-color: $general-color;
-        border-radius: 50%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: white;
-        font-size: 1.4rem;
-        cursor: pointer;
+    @media screen and (max-width: 600px) {
+      width: 350px;
+    }
+    &.video {
+      @media screen and (max-width: 700px) {
+        width: 450px;
       }
     }
-    main {
-      color: white;
-      width: 90%;
-      margin: 0 auto;
-      margin-top: 80px;
-      .about-movie {
-        width: 70%;
-        max-width: 300px;
-        .discription {
-          font-size: 1.2rem;
-        }
-        button {
-          width: 130px;
-          height: 40px;
-          font-size: 1rem;
-          background-color: $general-color;
-          color: white;
-          display: flex;
-          align-items: center;
-          justify-content: space-around;
-          cursor: pointer;
-          border-radius: 6px;
-          margin-top: 10px;
-        }
+    .Cast-item {
+      width: 250px;
+      height: 405px;
+      .image {
+        @include fit-background;
+        width: 100%;
+        height: 370px;
       }
+      .name {
+        margin-top: 10px;
+        font-size: 1.1rem;
+        color: $primary-color;
+        font-weight: bold;
+      }
+    }
+  }
+  .movie-item {
+    width: 250px;
+    height: 490px;
+    .image {
+      width: 100%;
+      height: 370px;
+      @include fit-background;
+    }
+    .finished {
+      margin: 5px 0;
+      color: #6b7280;
+      font-size: 0.9rem;
+    }
+    .title {
+      font-weight: bold;
+      font-size: 1.2rem;
+      color: $primary-color;
+    }
+    .rate {
+      width: 110px;
+      margin: 10px 0;
+      color: #6b7280;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .genres {
+      font-weight: bold;
+      font-size: 12px;
+      vertical-align: Top;
+      color: #6b7280;
+    }
+  }
+  .swiper-title {
+    width: 91%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .see-more {
+      color: $general-color;
+      display: flex;
+      align-items: center;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+  }
+}
+footer {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  color: $primary-color;
+  padding-bottom: 50px;
+  div {
+    margin: 7px 0;
+  }
+  width: 100%;
+  .socials {
+    font-size: 1.5rem;
+    span {
+      margin: 0 15px;
+    }
+  }
+  .terms {
+    span {
+      font-weight: bold;
+      margin: 0 15px;
+    }
+  }
+  .copy-right {
+    display: flex;
+    align-items: center;
+    font-weight: bolder;
+    color: #545454;
+    svg {
+      font-size: 1.2rem;
     }
   }
 }
