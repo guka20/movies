@@ -1,8 +1,6 @@
 import { useEffect, useState, useContext } from "react";
-import { GiHamburgerMenu } from "react-icons/gi";
 import { LoadingContext } from "../Context/Loading";
 import {
-  AiOutlineSearch,
   AiFillFacebook,
   AiOutlineInstagram,
   AiOutlineTwitter,
@@ -11,12 +9,13 @@ import {
 } from "react-icons/ai";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import { SwiperExcVid, SwiperTemp } from "../modules/Swiper";
-import { MovieItem } from "../modules/MovieItem";
+import { MovieItem } from "../components/MovieItem";
 import { SwiperSlide } from "swiper/react";
 import { fetchData } from "../api/Fetch";
-import { SearchResultModal } from "../modules/SearchResultModal";
+import { Header } from "../components/Header";
+import { useNavigate } from "react-router-dom";
 
-type MoviesDataTypes = [
+export type MoviesDataTypes = [
   {
     id: string;
     rank: string;
@@ -31,6 +30,7 @@ type MoviesDataTypes = [
 ];
 export const Home = () => {
   const { setIsLoading } = useContext(LoadingContext);
+  const navigate = useNavigate();
   const [movieData, setMovieData] = useState<MoviesDataTypes>([
     {},
   ] as MoviesDataTypes);
@@ -40,61 +40,38 @@ export const Home = () => {
   const [inTheaters, setInTheaters] = useState<MoviesDataTypes>([
     {},
   ] as MoviesDataTypes);
-  // const [searchResult, setSearchResult] = useState<MoviesDataTypes>([
-  //   {},
-  // ] as MoviesDataTypes);
-  const [searchInp, setSearchInp] = useState(String);
-  useEffect(() => {
-    console.log(searchInp || 5);
-  }, [searchInp]);
+
   useEffect(() => {
     setIsLoading(true);
     let isCancelled = false;
     if (!isCancelled) {
-      fetchData("Top250Movies").then((res) => {
+      fetchData("Top250Movies/k_p8ciwzz7").then((res) => {
+        console.log(res);
         setMovieData(res.items.slice(0, 20));
       });
-      fetchData("Top250TVs").then((res) => {
+      fetchData("Top250TVs/k_p8ciwzz7").then((res) => {
         setTvsData(res.items.slice(0, 20));
       });
-      fetchData("InTheaters").then((res) => {
+      fetchData("InTheaters/k_p8ciwzz7").then((res) => {
         setInTheaters(res.items.slice(0, 20));
       });
     }
     return () => {
       isCancelled = true;
+      setIsLoading(false);
     };
-  }, [setIsLoading]);
+  }, []);
   return (
     <>
-      {searchInp && <SearchResultModal searchText={searchInp} />}
-      <header className="header">
-        <nav className="navbar">
-          <div className="icon">
-            <img src={require("../assets/tv.png")} alt="icon" />
-            <b>Movies</b>
-          </div>
-          <div className="search">
-            <input
-              type="text"
-              placeholder="What do you want to watch?"
-              value={searchInp}
-              onChange={(e) => setSearchInp(e.target.value)}
-            />
-            <AiOutlineSearch />
-          </div>
-          <div className="hamburger-menu">
-            <GiHamburgerMenu />
-          </div>
-        </nav>
-      </header>
-
       <div className="home">
         <header className="swiper-title">
           <h2>Featured Movie</h2>
-          <div className="see-more">
+          <button
+            className="see-more"
+            onClick={() => navigate("/Top250Movies")}
+          >
             See more <MdKeyboardArrowRight />
-          </div>
+          </button>
         </header>
         <SwiperTemp id={1}>
           {movieData.map((l, index) => {
@@ -114,9 +91,9 @@ export const Home = () => {
 
         <header className="swiper-title">
           <h2>Featured TV's</h2>
-          <div className="see-more">
+          <button className="see-more" onClick={() => navigate("/Top250TVs")}>
             See more <MdKeyboardArrowRight />
-          </div>
+          </button>
         </header>
         <SwiperTemp id={1}>
           {tvsData.map((l, index) => {
@@ -140,9 +117,9 @@ export const Home = () => {
             target="_blank"
             rel="noreferrer"
           >
-            <div className="see-more">
+            <button className="see-more">
               See more <MdKeyboardArrowRight />
-            </div>
+            </button>
           </a>
         </header>
         <SwiperExcVid id={3}>
@@ -247,9 +224,9 @@ export const Home = () => {
         </SwiperExcVid>
         <header className="swiper-title">
           <h2>In Theaters</h2>
-          <div className="see-more">
+          <button className="see-more" onClick={() => navigate("/InTheaters")}>
             See more <MdKeyboardArrowRight />
-          </div>
+          </button>
         </header>
         <SwiperTemp id={4}>
           {inTheaters.map((l, index) => {
