@@ -45,7 +45,6 @@ export const Home = () => {
     let isCancelled = false;
     if (!isCancelled) {
       fetchData("Top250Movies/k_p8ciwzz7").then((res) => {
-        console.log(res);
         setMovieData(res.items.slice(0, 20));
       });
       fetchData("Top250TVs/k_p8ciwzz7").then((res) => {
