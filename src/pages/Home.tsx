@@ -12,7 +12,6 @@ import { SwiperExcVid, SwiperTemp } from "../modules/Swiper";
 import { MovieItem } from "../components/MovieItem";
 import { SwiperSlide } from "swiper/react";
 import { fetchData } from "../api/Fetch";
-import { Header } from "../components/Header";
 import { useNavigate } from "react-router-dom";
 
 export type MoviesDataTypes = [

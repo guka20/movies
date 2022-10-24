@@ -5,7 +5,6 @@ import { Header } from "./components/Header";
 import "./styles/index.scss";
 function App() {
   const { isLoading } = useContext(LoadingContext);
-
   return (
     <div className="App">
       <Header />
