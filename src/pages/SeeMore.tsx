@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { MdOutlineKeyboardArrowUp } from "react-icons/md";
-import { MoviesDataTypes } from "./Home";
+// import { MoviesDataTypes } from "./Home";
 import { fetchData } from "../api/Fetch";
-import { SearchResultItem } from "../components/SearchResultItem";
 
 export const SeeMore = () => {
   const { id } = useParams();
-  const [moviesData, setMoviesData] = useState<MoviesDataTypes>([
-    {},
-  ] as MoviesDataTypes);
+  // const [moviesData, setMoviesData] = useState<MoviesDataTypes>([
+  //   {},
+  // ] as MoviesDataTypes);
   const [visible, setVisible] = useState(false);
 
   const toggleVisible = () => {
@@ -32,12 +30,13 @@ export const SeeMore = () => {
     if (!isCancelled) {
       fetchData(`${id}`).then((res) => {
         console.log(res);
-        setMoviesData(res.results);
+        // setMoviesData(res.results);
       });
     }
     return () => {
       isCancelled = true;
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
