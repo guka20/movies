@@ -5,21 +5,30 @@ import { fetchData } from "../api/Fetch";
 import { Link } from "react-router-dom";
 export type SearchResultTypes = [
   {
-    description: string;
-    id: string;
-    image: string;
     title: string;
+    name: string;
+    id: number;
+    poster_path: string;
+    vote_average: number;
+    first_air_date: string;
   }
 ];
+
 export const Header = () => {
   const [searchInp, setSearchInp] = useState("");
-  const [searchResult, setSearchResult] = useState<SearchResultTypes>([
-    {},
-  ] as SearchResultTypes);
+  const [searchResult, setSearchResult] = useState<SearchResultTypes>(
+    {} as SearchResultTypes
+  );
   useEffect(() => {
-    fetchData(`Search/k_p8ciwzz7/${searchInp}`).then((res) => {
-      setSearchResult(res.results);
-    });
+    searchInp &&
+      fetchData(`/search/multi?query=${searchInp}&`).then((res) => {
+        console.log(res.results);
+        setSearchResult(
+          res.results.filter((el: any) => {
+            return el.poster_path !== null;
+          })
+        );
+      });
   }, [searchInp]);
   return (
     <>

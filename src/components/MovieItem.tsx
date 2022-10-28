@@ -5,6 +5,7 @@ type MovieItemProp = {
   finished: string;
   id: string;
 };
+const movieLocation = "https://image.tmdb.org/t/p/original/";
 export const MovieItem = ({
   finished,
   name,
@@ -14,7 +15,12 @@ export const MovieItem = ({
 }: MovieItemProp) => {
   return (
     <div className="movie-item" id={id}>
-      <div className="image" style={{ backgroundImage: `url(${image})` }} />
+      <div
+        className="image"
+        style={{
+          backgroundImage: `url(${movieLocation}${image})`,
+        }}
+      />
       <div className="finished">{finished}</div>
       <div className="title">{name}</div>
       <div className="rate">

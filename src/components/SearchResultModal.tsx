@@ -1,26 +1,34 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { SearchResultItem } from "./SearchResultItem";
-interface SearchResultModalTypes {
-  description: string;
-  id: string;
-  image: string;
+
+interface SearchResultTypes {
+  name: string;
   title: string;
+  id: number;
+  poster_path: string;
+  vote_average: number;
+  first_air_date: string;
 }
 type Prop = {
-  data: SearchResultModalTypes[];
+  data: SearchResultTypes[];
 };
+const movieLocation = "https://image.tmdb.org/t/p/original/";
 export const SearchResultModal = ({ data }: Prop) => {
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
   return (
     <div className="Search_Result_Modal">
-      {data === null ? (
+      {data.map === undefined ? (
         <span>No Result</span>
       ) : (
         data.map((l, index) => (
           <SearchResultItem
-            title={l.title}
-            image={l.image}
-            rate="0.0"
-            description={l.description}
+            key={index}
+            title={l.name || l.title}
+            image={`${movieLocation}${l?.poster_path}`}
+            rate={l.vote_average}
+            description={l.first_air_date}
           />
         ))
       )}

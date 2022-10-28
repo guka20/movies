@@ -30,8 +30,9 @@ export const SeeMore = () => {
   useEffect(() => {
     let isCancelled = false;
     if (!isCancelled) {
-      fetchData(`${id}/k_p8ciwzz7`).then((res) => {
-        setMoviesData(res.items);
+      fetchData(`${id}`).then((res) => {
+        console.log(res);
+        setMoviesData(res.results);
       });
     }
     return () => {
@@ -67,15 +68,6 @@ export const SeeMore = () => {
           />
         </svg>
       </button>
-      {moviesData.map((l, index) => (
-        <SearchResultItem
-          key={index}
-          image={l?.image}
-          title={l.fullTitle}
-          rate={l?.imDbRating}
-          description={l?.crew}
-        />
-      ))}
     </div>
   );
 };

@@ -1,8 +1,7 @@
 import axios from "axios";
-const key = "pk_z18tn6d6g86tqymg4";
 export default axios.create({
-  baseURL: "https://imdb-api.com/en/API",
-  headers: {
-    "x-api-key": key,
+  baseURL:"https://api.themoviedb.org/3",
+  params: {
+    api_key: "0b5380ff5db66ea8cdf18e1998943c3b",
   },
 });
