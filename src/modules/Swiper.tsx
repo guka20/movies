@@ -21,9 +21,11 @@ export const SwiperTemp = ({ children, id }: SwiperProps) => {
         breakpoints={{
           100: {
             slidesPerView: 1,
+
           },
           600: {
             slidesPerView: 2,
+
           },
           850: {
             slidesPerView: 3,
