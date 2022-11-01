@@ -11,6 +11,7 @@ export type SearchResultTypes = [
     poster_path: string;
     vote_average: number;
     first_air_date: string;
+    media_type: string;
   }
 ];
 
@@ -32,7 +33,9 @@ export const Header = () => {
   }, [searchInp]);
   return (
     <>
-      {searchInp && <SearchResultModal data={searchResult} />}
+      {searchInp && (
+        <SearchResultModal data={searchResult} removeSearch={setSearchInp} />
+      )}
       <header className="header">
         <nav className="navbar">
           <Link to="/">

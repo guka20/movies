@@ -1,5 +1,4 @@
-import { useEffect, useState, useContext } from "react";
-import { LoadingContext } from "../Context/Loading";
+import { useEffect, useState } from "react";
 import {
   AiFillFacebook,
   AiOutlineInstagram,
@@ -20,10 +19,12 @@ export type MoviesDataTypes = [
     vote_average: string;
     poster_path: string;
     release_date: string;
+    media_type: string;
   }
 ];
+
 export const Home = () => {
-  const { setIsLoading } = useContext(LoadingContext);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [movieData, setMovieData] = useState<MoviesDataTypes>([
     {},
   ] as MoviesDataTypes);
@@ -60,104 +61,111 @@ export const Home = () => {
             return elem.poster_path !== null;
           })
         );
+        setIsLoading(false);
       });
     }
     return () => {
       isCancelled = true;
-      setIsLoading(false);
     };
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <>
-      <div className="home">
-        <header className="swiper-title">
-          <h2>Featured Movie</h2>
-        </header>
-        <SwiperTemp id={1}>
-          {movieData.map((l, index) => {
-            return (
-              <SwiperSlide key={index}>
-                <Link to={`/${l.id}`}>
-                  <MovieItem
-                    id={l.id}
-                    finished={l?.release_date}
-                    name={l?.title}
-                    rate={l?.vote_average}
-                    image={l?.poster_path}
-                  />
-                </Link>
-              </SwiperSlide>
-            );
-          })}
-        </SwiperTemp>
+      {isLoading ? (
+        <h1>Loading...</h1>
+      ) : (
+        <>
+          <div className="home">
+            <header className="swiper-title">
+              <h2>Featured Movie</h2>
+            </header>
+            <SwiperTemp id={1}>
+              {movieData.map((l, index) => {
+                return (
+                  <SwiperSlide key={index}>
+                    <Link to={`movie/${l.id}`}>
+                      <MovieItem
+                        id={l.id}
+                        finished={l?.release_date}
+                        name={l?.title}
+                        rate={l?.vote_average}
+                        image={l?.poster_path}
+                      />
+                    </Link>
+                  </SwiperSlide>
+                );
+              })}
+            </SwiperTemp>
 
-        <header className="swiper-title">
-          <h2>Comming Soon</h2>
-        </header>
-        <SwiperTemp id={2}>
-          {comingSoonData.map((l, index) => {
-            return (
-              <SwiperSlide key={index}>
-                <Link to={`/${l.id}`}>
-                  <MovieItem
-                    id={l.id}
-                    finished={l?.release_date}
-                    name={l?.title}
-                    rate={l?.vote_average}
-                    image={l?.poster_path}
-                  />
-                </Link>
-              </SwiperSlide>
-            );
-          })}
-        </SwiperTemp>
+            <header className="swiper-title">
+              <h2>Comming Soon</h2>
+            </header>
+            <SwiperTemp id={2}>
+              {comingSoonData.map((l, index) => {
+                return (
+                  <SwiperSlide key={index}>
+                    <Link to={`movie/${l.id}`}>
+                      <MovieItem
+                        id={l.id}
+                        finished={l?.release_date}
+                        name={l?.title}
+                        rate={l?.vote_average}
+                        image={l?.poster_path}
+                      />
+                    </Link>
+                  </SwiperSlide>
+                );
+              })}
+            </SwiperTemp>
 
-        <header className="swiper-title">
-          <h2>In Theaters</h2>
-        </header>
-        <SwiperTemp id={4}>
-          {inTheaters.map((l, index) => {
-            return (
-              <SwiperSlide key={index}>
-                <Link to={`${l.id}`}>
-                  <MovieItem
-                    id={l.id}
-                    finished={l?.release_date}
-                    name={l?.title}
-                    rate={l?.vote_average}
-                    image={l?.poster_path}
-                  />
-                </Link>
-              </SwiperSlide>
-            );
-          })}
-        </SwiperTemp>
-      </div>
-      <footer>
-        <div className="socials">
-          <span>
-            <AiFillFacebook />
-          </span>
-          <span>
-            <AiOutlineInstagram />
-          </span>
-          <span>
-            <AiOutlineTwitter />
-          </span>
-          <span>
-            <AiFillYoutube />
-          </span>
-        </div>
-        <div className="terms">
-          <span>Condition of Use</span>
-          <span>Privacy & Policy</span>
-          <span>Press Room</span>
-        </div>
-        <div className="copy-right">
-          <AiOutlineCopyrightCircle /> 2022 Movie by Gurami Davitadze
-        </div>
-      </footer>
+            <header className="swiper-title">
+              <h2>In Theaters</h2>
+            </header>
+            <SwiperTemp id={4}>
+              {inTheaters.map((l, index) => {
+                return (
+                  <SwiperSlide key={index}>
+                    <Link to={`movie/${l.id}`}>
+                      <MovieItem
+                        id={l.id}
+                        finished={l?.release_date}
+                        name={l?.title}
+                        rate={l?.vote_average}
+                        image={l?.poster_path}
+                      />
+                    </Link>
+                  </SwiperSlide>
+                );
+              })}
+            </SwiperTemp>
+          </div>
+          <footer>
+            <div className="socials">
+              <span>
+                <AiFillFacebook />
+              </span>
+              <span>
+                <AiOutlineInstagram />
+              </span>
+              <span>
+                <AiOutlineTwitter />
+              </span>
+              <span>
+                <AiFillYoutube />
+              </span>
+            </div>
+            <div className="terms">
+              <span>Condition of Use</span>
+              <span>Privacy & Policy</span>
+              <span>Press Room</span>
+            </div>
+            <div className="copy-right">
+              <AiOutlineCopyrightCircle /> 2022 Movie by Gurami Davitadze
+            </div>
+          </footer>
+        </>
+      )}
     </>
   );
 };

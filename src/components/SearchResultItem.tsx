@@ -4,12 +4,15 @@ type SearchResultItemProps = {
   title: string;
   description: string;
   rate: number;
+  media_type: string;
+  removeSearch: React.Dispatch<React.SetStateAction<string>>;
 };
 export const SearchResultItem = ({
   image,
   title,
   rate,
   description,
+
 }: SearchResultItemProps) => {
   return (
     <div className="search_result_item">
