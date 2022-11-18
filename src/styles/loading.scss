@@ -1,0 +1,45 @@
+.loading {
+  width: 150px;
+  height: 150px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .parent {
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+    border: 4px solid;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-color: black transparent black transparent;
+    animation: firstspin 3s linear infinite;
+    .child {
+      border-radius: 50%;
+      width: 70%;
+      height: 70%;
+      border: 4px solid;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      font-size: 1.3rem;
+      animation: spin 1.5s linear infinite;
+      border-color: transparent black transparent black;
+    }
+  }
+}
+@keyframes spin {
+  to {
+    transform: rotate(-360deg);
+  }
+}
+@keyframes firstspin {
+  to {
+    transform: rotate(360deg);
+  }
+}

@@ -4,6 +4,7 @@ import { SwiperTemp } from "../modules/Swiper";
 import { fetchData } from "../api/Fetch";
 import { SwiperSlide } from "swiper/react";
 import { SimilarMovieItem } from "../components/SimilarMovieItem";
+import { Loading } from "../components/Loading";
 type MovieDataTypes = {
   id: number;
   name: string;
@@ -57,7 +58,7 @@ export const Movie = () => {
   return (
     <>
       {isLoading ? (
-        <h1>Loading...</h1>
+        <Loading />
       ) : (
         <section className="movie_page">
           <header>
@@ -85,7 +86,7 @@ export const Movie = () => {
               <li>
                 <b>Overview:</b>
                 <div className="description">
-                  {movieData.overview || "No description"}
+                  {movieData.overview || "No overview"}
                 </div>
               </li>
               <li className="rate">
@@ -102,13 +103,13 @@ export const Movie = () => {
           </header>
           <main>
             <header className="swiper-title">
-              <h2>Featured Movie</h2>
+              <h2>Similar Movie</h2>
             </header>
             <SwiperTemp id={5}>
               {similarMovieData.map((l, index) => {
                 return (
                   <SwiperSlide key={index}>
-                    <Link to={`/movie/${l?.id}`}>
+                    <Link to={`/${type}/${l?.id}`}>
                       <SimilarMovieItem
                         name={l?.title}
                         rate={l?.vote_average}

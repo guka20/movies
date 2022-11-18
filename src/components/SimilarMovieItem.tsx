@@ -13,7 +13,7 @@ export const SimilarMovieItem = ({
     <div className="similar_movie_item">
       <div className="item">
         <div className="image" style={{ backgroundImage: `url(${image})` }} />
-        <div className="rate">{rate} / 10</div>
+        <div className="rate">IMDB {rate} / 10</div>
       </div>
       <h3>{name}</h3>
     </div>

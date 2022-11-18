@@ -1,17 +1,11 @@
 import { useEffect, useState } from "react";
-import {
-  AiFillFacebook,
-  AiOutlineInstagram,
-  AiOutlineTwitter,
-  AiFillYoutube,
-  AiOutlineCopyrightCircle,
-} from "react-icons/ai";
 
 import { SwiperTemp } from "../modules/Swiper";
 import { MovieItem } from "../components/MovieItem";
 import { SwiperSlide } from "swiper/react";
 import { fetchData } from "../api/Fetch";
 import { Link } from "react-router-dom";
+import { Loading } from "../components/Loading";
 export type MoviesDataTypes = [
   {
     id: string;
@@ -37,43 +31,36 @@ export const Home = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    let isCancelled = false;
-    if (!isCancelled) {
-      fetchData("/discover/movie?sort_by=popularity.desc?").then((res) => {
-        setMovieData(
-          res.results.filter((elem: any) => {
-            return elem.poster_path !== null;
-          })
-        );
-      });
-      fetchData("/movie/upcoming?").then((res) => {
-        setComingSoonData(
-          res.results.filter((elem: any) => {
-            return elem.poster_path !== null;
-          })
-        );
-      });
-      fetchData(
-        `/discover/movie?primary_release_date.gte=2022-01-01&primary_release_date.lte=2022-10-22&`
-      ).then((res) => {
-        setInTheaters(
-          res.results.filter((elem: any) => {
-            return elem.poster_path !== null;
-          })
-        );
-        setIsLoading(false);
-      });
-    }
-    return () => {
-      isCancelled = true;
-    };
+    fetchData("/discover/movie?sort_by=popularity.desc?").then((res) => {
+      setMovieData(
+        res.results.filter((elem: any) => {
+          return elem.poster_path !== null;
+        })
+      );
+    });
+    fetchData("/movie/upcoming?").then((res) => {
+      setComingSoonData(
+        res.results.filter((elem: any) => {
+          return elem.poster_path !== null;
+        })
+      );
+    });
+    fetchData(
+      `/discover/movie?primary_release_date.gte=2022-01-01&primary_release_date.lte=2022-10-22&`
+    ).then((res) => {
+      setInTheaters(
+        res.results.filter((elem: any) => {
+          return elem.poster_path !== null;
+        })
+      );
+      setIsLoading(false);
+    });
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <>
       {isLoading ? (
-        <h1>Loading...</h1>
+        <Loading />
       ) : (
         <>
           <div className="home">
@@ -140,30 +127,7 @@ export const Home = () => {
               })}
             </SwiperTemp>
           </div>
-          <footer>
-            <div className="socials">
-              <span>
-                <AiFillFacebook />
-              </span>
-              <span>
-                <AiOutlineInstagram />
-              </span>
-              <span>
-                <AiOutlineTwitter />
-              </span>
-              <span>
-                <AiFillYoutube />
-              </span>
-            </div>
-            <div className="terms">
-              <span>Condition of Use</span>
-              <span>Privacy & Policy</span>
-              <span>Press Room</span>
-            </div>
-            <div className="copy-right">
-              <AiOutlineCopyrightCircle /> 2022 Movie by Gurami Davitadze
-            </div>
-          </footer>
+          
         </>
       )}
     </>

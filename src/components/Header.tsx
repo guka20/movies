@@ -48,7 +48,7 @@ export const Header = () => {
           <div className="search">
             <input
               type="text"
-              placeholder="What do you want to watch?"
+              placeholder="Search here..."
               value={searchInp}
               onChange={(e) => setSearchInp(e.target.value)}
             />
